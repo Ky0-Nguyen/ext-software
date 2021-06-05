@@ -2,13 +2,23 @@ import React, { createContext, useEffect, useMemo, useReducer } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { ROUTE_KEY } from '@constants/route-key'
 import { MainTab } from './private-routes/tabbar/MainTab'
-import { localStorage } from '@configuration/local-storage'
 import { PublicStack } from './public-routes/authen-stack'
-import { get } from 'lodash'
+import { ActivityIndicator } from 'react-native-paper'
+import { View } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 
-const AuthContext = createContext(null)
+
+const AuthContext: any = createContext(null)
 
 const Stack = createStackNavigator()
+
+const LoadingView = () => {
+  return (
+    <View style={{ flex: 1, backgroundColor: 'green', justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator />
+    </View>
+  )
+}
 
 const AppNavigator = () => {
   const [state, dispatch] = useReducer(
@@ -42,9 +52,15 @@ const AppNavigator = () => {
   );
 
   useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
-      let userToken = localStorage.token.access_token
+      let userToken;
+
+      try {
+        userToken = await AsyncStorage.getItem('@token')
+      } catch (e) {
+        // Restoring token failed
+      }
+
       dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     };
 
@@ -54,20 +70,15 @@ const AppNavigator = () => {
   const authContext: any = useMemo(
     () => ({
       signIn: async (data: any) => {
-        // In a production app, we need to send some data (usually username, password) to server and get a token
-        // We will also need to handle errors if sign in failed
-        // After getting token, we need to persist the token using `SecureStore`
-        // In the example, we'll use a dummy token
-
+        const jsonValue = JSON.stringify({ isAuthenticate: true })
+        await AsyncStorage.setItem('@token', jsonValue)
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
       },
-      signOut: () => dispatch({ type: 'SIGN_OUT', token: '' }),
+      signOut: async () => {
+        await AsyncStorage.removeItem('@token')
+        dispatch({ type: 'SIGN_OUT', token: '' })
+      },
       signUp: async (data: any) => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore`
-        // In the example, we'll use a dummy token
-
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
       },
     }),
@@ -77,9 +88,11 @@ const AppNavigator = () => {
     <AuthContext.Provider value={authContext}>
       <Stack.Navigator initialRouteName={ROUTE_KEY.MAIN_TAB} headerMode="none">
         {
-          (state.userToken === null || state.userToken.length === 0)
-            ? <Stack.Screen name={ROUTE_KEY.PUBLIC_STACK} component={PublicStack} />
-            : <Stack.Screen name={ROUTE_KEY.MAIN_TAB} component={MainTab} />
+          state.isLoading
+            ? <Stack.Screen name={'LOADING_VIEW'} component={LoadingView} />
+            : (state.userToken === null || state.userToken.length === 0)
+              ? <Stack.Screen name={ROUTE_KEY.PUBLIC_STACK} component={PublicStack} />
+              : <Stack.Screen name={ROUTE_KEY.MAIN_TAB} component={MainTab} />
         }
       </Stack.Navigator>
     </AuthContext.Provider>

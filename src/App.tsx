@@ -1,5 +1,5 @@
 import 'mobx-react-lite/batchingForReactNative'
-import React, { useEffect, createContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'react-native'
 import { AppNavigator } from './navigation/app-navigator'
 import { NavigationContainer } from '@react-navigation/native'
@@ -55,7 +55,6 @@ const App = () => {
       navigationServices.isMountedRef.current = false
     }
   }, [])
-
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <NavigationContainer
