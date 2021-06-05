@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Text, View } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 
-const HomeScreen = () => {
+const SettingScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide()
@@ -16,4 +16,4 @@ const HomeScreen = () => {
   )
 }
 
-export default observer(HomeScreen)
+export default observer(SettingScreen)
