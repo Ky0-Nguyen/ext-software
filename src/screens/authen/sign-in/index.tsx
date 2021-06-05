@@ -1,27 +1,27 @@
 import { AuthContext } from '@navigation/app-navigator'
 import { observer } from 'mobx-react'
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 
-const HomeScreen = () => {
+const SignInScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide()
     }, 1500);
   })
-  const { signOut } = useContext(AuthContext)
-  const logout = () => {
-    signOut()
+  const { signIn } = useContext(AuthContext)
+  const login = () => {
+    signIn({ username: 'thienthanmeo', password: 'tuan tuan' })
   }
 
   return (
     <View style={{ height: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: 'red' }}>
-      <TouchableOpacity onPress={logout}>
-        <Text>logout</Text>
+      <TouchableOpacity onPress={login}>
+        <Text>Login</Text>
       </TouchableOpacity>
     </View>
   )
 }
 
-export default observer(HomeScreen)
+export default observer(SignInScreen)
