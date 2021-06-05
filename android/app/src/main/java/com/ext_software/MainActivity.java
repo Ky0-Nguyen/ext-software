@@ -12,4 +12,11 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "ext_software";
   }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+      SplashScreen.show(this);  // here
+      super.onCreate(savedInstanceState);
+  }
 }
+
