@@ -1,5 +1,5 @@
 import 'mobx-react-lite/batchingForReactNative'
-import React, { useEffect } from 'react'
+import React, { useEffect, createContext } from 'react'
 import { StatusBar } from 'react-native'
 import { AppNavigator } from './navigation/app-navigator'
 import { NavigationContainer } from '@react-navigation/native'
@@ -7,7 +7,7 @@ import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-c
 import { isIOS } from '@utils/platform'
 import { navigationServices } from './navigation/services'
 import { setCustomText, setCustomTextInput } from '@utils/custom-native-components'
-import { Configuration, ENVIRONMENT } from '@configuration/configuration'
+import { Configuration } from '@configuration/configuration'
 
 declare const GLOBAL: any
 GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest
@@ -16,7 +16,6 @@ const TEXT_DEFAULT_COLOR = '#111111'
 const PLACEHOLDER_DEFAULT_COLOR = '##c3c3c3'
 
 const localInit = async () => {
-  // __DEV__ ? await Configuration.initialize('dev') : await Configuration.initialize('prod')
   await Configuration.initialize()
   const propText = {
     maxFontSizeMultiplier: 0,
