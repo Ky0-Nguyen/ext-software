@@ -60,9 +60,9 @@ class NavigationStore {
     navigationRef.current.dispatch(navigateAction)
   }
 
-  public pushToScreen = (screen: string, params?: any) => {
+  public pushToScreen = (routeName: string, params?: any) => {
     if (isMountedRef.current && navigationRef.current) {
-      screen && navigationRef.current.navigate(screen, params)
+      routeName && navigationRef.current.navigate(routeName, params)
     } else {
       // You can decide what to do if the app hasn't mounted
       // You can ignore this, or add these actions to a queue you can call later
@@ -76,5 +76,4 @@ class NavigationStore {
     // logScreen(currentScreen)
   }
 }
-
 export { NavigationStore }
