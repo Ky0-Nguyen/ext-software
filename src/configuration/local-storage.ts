@@ -25,6 +25,11 @@ class LocalStorages {
     this.token = token
     await this.save()
   }
+
+  public clearToken = async () => {
+    this.token = { access_token: '', refresh_token: '' }
+    await this.save()
+  }
 }
 
 const instance = new LocalStorages()
