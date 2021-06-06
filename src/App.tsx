@@ -8,6 +8,7 @@ import { isIOS } from '@utils/platform'
 import { navigationServices } from './navigation/services'
 import { setCustomText, setCustomTextInput } from '@utils/custom-native-components'
 import { Configuration } from '@configuration/configuration'
+import { notificationHelper } from '@services/notification-helpers'
 
 declare const GLOBAL: any
 GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest
@@ -48,10 +49,18 @@ const App = () => {
     StatusBar.setBarStyle('light-content')
     const init = async () => {
       await localInit()
+      notificationHelper.registerRemoteNotifications()
+      notificationHelper.registerNotificationReceivedForeground()
+      notificationHelper.registerNotificationOpened()
+      notificationHelper.getInitialNotification()
       navigationServices.isMountedRef.current = true
     }
     init()
     return () => {
+      notificationHelper.getInitialNotification()
+      notificationHelper.registerRemoteNotifications()
+      notificationHelper.registerNotificationReceivedForeground()
+      notificationHelper.registerNotificationOpened()
       navigationServices.isMountedRef.current = false
     }
   }, [])
