@@ -6,6 +6,7 @@ import { PublicStack } from './public-routes/authen-stack'
 import { ActivityIndicator } from 'react-native-paper'
 import { View } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
+import { boolean } from 'mobx-state-tree/dist/internal'
 
 
 const AuthContext: any = createContext(null)
@@ -20,7 +21,7 @@ const LoadingView = () => {
   )
 }
 
-const AppNavigator = () => {
+const AppNavigator = ({ isAuthenticate = false }: { isAuthenticate: boolean }) => {
   const [state, dispatch] = useReducer(
     (prevState: any, action: { type: any; token: any }) => {
       switch (action.type) {
@@ -58,7 +59,8 @@ const AppNavigator = () => {
       try {
         userToken = await AsyncStorage.getItem('@token')
       } catch (e) {
-        // Restoring token failed
+        console.error(e)
+        userToken = null
       }
 
       dispatch({ type: 'RESTORE_TOKEN', token: userToken });
@@ -84,6 +86,15 @@ const AppNavigator = () => {
     }),
     []
   );
+  if (!isAuthenticate) {
+    return (
+      <AuthContext.Provider value={authContext}>
+        <Stack.Navigator initialRouteName={ROUTE_KEY.MAIN_TAB} headerMode="none">
+          <Stack.Screen name={ROUTE_KEY.MAIN_TAB} component={MainTab} />
+        </Stack.Navigator>
+      </AuthContext.Provider>
+    )
+  }
   return (
     <AuthContext.Provider value={authContext}>
       <Stack.Navigator initialRouteName={ROUTE_KEY.MAIN_TAB} headerMode="none">
