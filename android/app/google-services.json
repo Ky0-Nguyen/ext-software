@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "232762905783",
+    "project_id": "ext-software",
+    "storage_bucket": "ext-software.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232762905783:android:7d56789fd90939b8ace932",
+        "android_client_info": {
+          "package_name": "com.ext_software"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232762905783-nn6m50j5r7jur5cjabjelh82q4ngvh17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhirdWOjRbZXL3hK5UzRN8-WfDAHlBXIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232762905783-nn6m50j5r7jur5cjabjelh82q4ngvh17.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "232762905783-thffe9s2dsrohu23ur4kcufidjlmti77.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ext-software"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
