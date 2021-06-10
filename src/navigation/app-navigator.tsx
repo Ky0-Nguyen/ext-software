@@ -21,7 +21,7 @@ const LoadingView = () => {
   )
 }
 
-const AppNavigator = ({ isAuthenticate = false }: { isAuthenticate: boolean }) => {
+const AppNavigator = ({ isAuthenticate = false }: { isAuthenticate?: boolean }) => {
   const [state, dispatch] = useReducer(
     (prevState: any, action: { type: any; token: any }) => {
       switch (action.type) {
