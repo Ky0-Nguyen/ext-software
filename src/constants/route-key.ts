@@ -3,5 +3,6 @@ export const ROUTE_KEY = {
   MAIN_TAB: 'MAIN_TAB',
   HOME: 'HOME',
   SETTINGS: 'SETTINGS',
-  SIGN_IN: 'SIGN_IN'
+  SIGN_IN: 'SIGN_IN',
+  WEB_VIEW: 'WEB_VIEW'
 }

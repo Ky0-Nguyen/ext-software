@@ -11,7 +11,7 @@ const SettingScreen = () => {
   })
   return (
     <View>
-      <Text>Home Screen</Text>
+      <Text>Settings Screen</Text>
     </View>
   )
 }

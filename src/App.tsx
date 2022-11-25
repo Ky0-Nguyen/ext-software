@@ -1,4 +1,3 @@
-import 'mobx-react-lite/batchingForReactNative'
 import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'react-native'
 import { AppNavigator } from './navigation/app-navigator'
@@ -9,9 +8,6 @@ import { navigationServices } from './navigation/services'
 import { setCustomText, setCustomTextInput } from '@utils/custom-native-components'
 import { Configuration } from '@configuration/configuration'
 import { notificationHelper } from '@services/notification-helpers'
-
-declare const GLOBAL: any
-GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest
 
 const TEXT_DEFAULT_COLOR = '#111111'
 const PLACEHOLDER_DEFAULT_COLOR = '##c3c3c3'

@@ -5,8 +5,8 @@ import { MainTab } from './private-routes/tabbar/MainTab'
 import { PublicStack } from './public-routes/authen-stack'
 import { ActivityIndicator } from 'react-native-paper'
 import { View } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
-import { boolean } from 'mobx-state-tree/dist/internal'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import WebViewScreen from '@screens/web-view'
 
 
 const AuthContext: any = createContext(null)
@@ -89,8 +89,15 @@ const AppNavigator = ({ isAuthenticate = false }: { isAuthenticate?: boolean }) 
   if (!isAuthenticate) {
     return (
       <AuthContext.Provider value={authContext}>
-        <Stack.Navigator initialRouteName={ROUTE_KEY.MAIN_TAB} headerMode="none">
+        <Stack.Navigator 
+        screenOptions={{
+          title: ''
+        }}
+        initialRouteName={ROUTE_KEY.MAIN_TAB}>
           <Stack.Screen name={ROUTE_KEY.MAIN_TAB} component={MainTab} />
+          <Stack.Screen 
+          
+          name={ROUTE_KEY.WEB_VIEW} component={WebViewScreen} />
         </Stack.Navigator>
       </AuthContext.Provider>
     )

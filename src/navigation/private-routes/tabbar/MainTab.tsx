@@ -3,6 +3,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { ROUTE_KEY } from '@constants/route-key'
 import HomeScreen from '@screens/home'
 import SettingScreen from '@screens/settings'
+import WebViewScreen from '@screens/web-view'
 
 const Tab = createMaterialBottomTabNavigator()
 
