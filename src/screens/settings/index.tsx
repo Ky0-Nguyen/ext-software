@@ -1,17 +1,19 @@
+import { ROUTE_KEY } from '@constants/route-key'
+import { navigationServices } from '@navigation/services'
 import { observer } from 'mobx-react'
 import React, { useEffect } from 'react'
-import { Text, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 
 const SettingScreen = () => {
-  useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hide()
-    }, 1500);
-  })
+  const onPress = () => {
+    navigationServices.pushToScreen(ROUTE_KEY.SETTING_STACK)
+  }
   return (
-    <View>
-      <Text>Settings Screen</Text>
+    <View style={{ flex:1, backgroundColor: 'yellow', justifyContent: 'center',alignItems: 'center', }}>
+      <TouchableOpacity onPress={onPress}>
+        <Text>Go To Next Screen</Text>
+      </TouchableOpacity>
     </View>
   )
 }

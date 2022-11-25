@@ -8,7 +8,7 @@ class NavigationServices {
 
   isMountedRef = isMountedRef
 
-  pushToScreen = (routeName: string, params: any) => {
+  pushToScreen = (routeName: string, params?: any) => {
     this.navigationStore.pushToScreen(routeName, params)
   }
 

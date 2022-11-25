@@ -4,6 +4,7 @@ import { ROUTE_KEY } from '@constants/route-key'
 import HomeScreen from '@screens/home'
 import SettingScreen from '@screens/settings'
 import WebViewScreen from '@screens/web-view'
+import { SettingStack } from '../SettingStack'
 
 const Tab = createMaterialBottomTabNavigator()
 

@@ -7,6 +7,7 @@ import { ActivityIndicator } from 'react-native-paper'
 import { View } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import WebViewScreen from '@screens/web-view'
+import { SettingStack } from './private-routes/SettingStack'
 
 
 const AuthContext: any = createContext(null)
@@ -89,15 +90,14 @@ const AppNavigator = ({ isAuthenticate = false }: { isAuthenticate?: boolean }) 
   if (!isAuthenticate) {
     return (
       <AuthContext.Provider value={authContext}>
-        <Stack.Navigator 
-        screenOptions={{
-          title: ''
-        }}
-        initialRouteName={ROUTE_KEY.MAIN_TAB}>
+        <Stack.Navigator
+          screenOptions={{
+            title: ''
+          }}
+          initialRouteName={ROUTE_KEY.MAIN_TAB}>
           <Stack.Screen name={ROUTE_KEY.MAIN_TAB} component={MainTab} />
-          <Stack.Screen 
-          
-          name={ROUTE_KEY.WEB_VIEW} component={WebViewScreen} />
+          <Stack.Screen name={ROUTE_KEY.WEB_VIEW} component={WebViewScreen} />
+          <Stack.Screen name={ROUTE_KEY.SETTING_STACK} component={SettingStack} />
         </Stack.Navigator>
       </AuthContext.Provider>
     )
